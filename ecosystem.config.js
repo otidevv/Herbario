@@ -4,7 +4,7 @@ module.exports = {
       name: "herbario",
       script: "waitress-serve",
       args: "--port=5000 app:app",
-      cwd: "C:/Apache24/htdocs/Herbario",
+      cwd: "C:/Apache24/htdocs/App-Galery-Unamad",
       interpreter: "none",
       watch: false,
       autorestart: true,
