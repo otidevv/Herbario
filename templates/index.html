@@ -1,0 +1,67 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Inicio - Herbario Digital{% endblock %}
+
+{% block content %}
+
+<div class="search-container">
+    <div class="search-tabs">
+        <div class="tab active">Inicio</div>
+        <a href="{{ url_for('busqueda_rapida') }}" class="tab">Búsqueda Rápida</a>
+        <a href="{{ url_for('busqueda_avanzada') }}" class="tab">Búsqueda Avanzada </a>
+    </div>
+    
+
+    <div class="results-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre Cientifico</th>
+                    <th>Genero/Especie</th>
+                    <th>Colectores</th>
+                    <th>Fecha</th>
+                    <th>País</th>
+                    <th>Departamento</th>
+                    <th>Provincia</th>
+                    <th>Distrito</th>
+                    <th><span class="icon">📷</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resultado in resultados %}
+                <tr>
+                    <td><a href="{{ url_for('especie',Ncientifico=resultado.nombre_cientifico,id=resultado.Id) }}">{{ resultado.nombre_cientifico }}</a></td>
+                    <td>{{ resultado.Genero_especie or '—' }}</td>
+                    <td>{{ resultado.Colectores or '—' }}</td>
+                    <td>{{ resultado.Fecha_colecta or '—' }}</td>
+                    <td>{{ resultado.Pais or '—' }}</td>
+                    <td>{{ resultado.Departamento or '—' }}</td>
+                    <td>{{ resultado.Provincia or '—' }}</td>
+                    <td>{{ resultado.Distrito or '—' }}</td>
+                    <td class="center">
+                        {% if resultado.image_path %}
+                        <a href="{{ url_for('especie',Ncientifico=resultado.Genero_especie,id=resultado.Id) }}">
+                            <img src="{{ url_for('static', filename='thumbnails/'~ resultado.image_path.split("/")[0]) }}" class="thumbnail" alt="Imagen en miniatura">
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="paginacion">
+        {% if pagina_actual > 1 %}
+            <a href="{{ url_for('index', pagina=pagina_actual-1) }}">Anterior</a>
+        {% endif %}
+
+        <span>Página {{ pagina_actual }} de {{ total_paginas }}</span>
+
+        {% if pagina_actual < total_paginas %}
+            <a href="{{ url_for('index', pagina=pagina_actual+1) }}">Siguiente</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

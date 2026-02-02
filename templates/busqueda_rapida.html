@@ -1,0 +1,83 @@
+<!-- templates/busqueda_rapida.html -->
+{% extends 'base.html' %}
+
+{% block title %}Búsqueda Rápida - Herbario Digital{% endblock %}
+
+{% block content %}
+
+<div class="search-container">
+    <div class="search-tabs">
+        <a href="{{ url_for('index') }}" class="tab">Inicio</a>
+        <div class="tab active">Búsqueda Rápida</div>
+        <a href="{{ url_for('busqueda_avanzada') }}" class="tab">Búsqueda Avanzada </a>
+    </div>
+
+    <div class="search-form">
+        <form action="{{ url_for('buscar') }}" method="GET">
+            <div class="search-input-container">
+                <input
+                    name="query" 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="Ingrese Nombre Científico, Genero, Especie o Departamento" required>
+                <button class="search-button" type="search-button">
+                    <svg class="search-icon" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="results-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre Cientifico</th>
+                    <th>Genero/Especie</th>
+                    <th>Colectores</th>
+                    <th>Fecha</th>
+                    <th>País</th>
+                    <th>Departamento</th>
+                    <th>Provincia</th>
+                    <th>Distrito</th>
+                    <th><span class="icon">📷</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resultado in resultados %}
+                <tr>
+                    <td><a href="{{ url_for('especie',Ncientifico=resultado.Genero_especie,id=resultado.Id) }}">{{ resultado.nombre_cientifico }}</a></td>
+                    <td>{{ resultado.Genero_especie or '—' }}</td>
+                    <td>{{ resultado.Colectores or '—' }}</td>
+                    <td>{{ resultado.Fecha_colecta or '—' }}</td>
+                    <td>{{ resultado.Pais or '—' }}</td>
+                    <td>{{ resultado.Departamento or '—' }}</td>
+                    <td>{{ resultado.Provincia or '—' }}</td>
+                    <td>{{ resultado.Distrito or '—' }}</td>
+                    <td class="center">
+                        {% if resultado.image_path %}
+                        <a href="{{ url_for('especie',Ncientifico=resultado.Genero_especie,id=resultado.Id) }}">
+                            <img src="{{ url_for('static', filename='thumbnails/'~ resultado.image_path.split("/")[0]) }}" class="thumbnail" alt="Imagen en miniatura">
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="paginacion">
+        {% if pagina_actual > 1 %}
+            <a href="{{ url_for('index', pagina=pagina_actual-1) }}">Anterior</a>
+        {% endif %}
+
+        <span>Página {{ pagina_actual }} de {{ total_paginas }}</span>
+
+        {% if pagina_actual < total_paginas %}
+            <a href="{{ url_for('index', pagina=pagina_actual+1) }}">Siguiente</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

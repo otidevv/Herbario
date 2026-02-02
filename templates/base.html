@@ -1,0 +1,33 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo_HAG.ico') }}" type="Image/x-icon">
+        <title>{% block title %}Herbario ALWYN GENTRY{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    </head>
+    
+<body class="fondo-imagen"> 
+    <header class="blog-header d-flex justify-content-between align-items-center">
+        <h1 class="m-0">HERBARIO ALWYN GENTRY</h1>
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo" class="logo-superior-derecho">
+        <img src="{{ url_for('static', filename='images/logo_HAG.png') }}" alt="Logo" class="logo-superior-izquierdo">
+    </header>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+<footer>
+    <hr>
+    <p style="text-align: center; color: gray;">
+        &copy; 2025 Herbario Digital - 
+    <a href="herbariohag@unamad.edu.pe">Herbario Alwyn Gentry</a> © 2025 by <a href="https://portal.unamad.edu.pe/">UNAMAD</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">    
+    </p>
+</footer>
+
+</html>

@@ -1,0 +1,219 @@
+<!-- templates/viewer.html -->
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo_HAG.ico') }}" type="Image/x-icon">
+        <title>Galería de Imágenes</title>
+        <link rel="icon" type="static/images" href="logo_HAG.ico">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/viewer.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+        
+    </head>
+<body>
+    <div class="blog-container">
+        <!-- Header del Blog -->
+        <header class="blog-header d-flex justify-content-between align-items-center">
+            <h1 class="blog-title">Galería Fotográfica</h1>
+        </header>   
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo" class="logo-superior-derecho">
+            <img src="{{ url_for('static', filename='images/logo_HAG.png') }}" alt="Logo" class="logo-superior-izquierdo">
+        <!-- Imágenes de ejemplo -->
+        <div class="photo-images">
+            {% for imagen in resultados %}
+            <img src="{{ url_for('static', filename='images/' + imagen) }}" alt="{{ imagen }}" data-photo>
+            {% endfor %}
+        </div>
+
+        <!-- Visualizador de Imágenes -->
+        <section class="viewer-section">
+            <div class="viewer-container" id="viewerContainer">
+                <div class="main-viewer" id="mainViewer">
+                    <div class="zoom-container" id="zoomContainer">
+                        <img id="mainImage" class="main-image" src="" alt="Imagen principal">
+                    </div>
+                    <div class="zoom-info" id="zoomInfo">Zoom: 100%</div>
+                    <div class="cursor-indicator" id="cursorIndicator">Coloca el cursor sobre la imagen para hacer zoom</div>
+                    
+                    <div class="zoom-controls">
+                        <button class="control-btn" id="zoomInBtn" title="Zoom In">+</button>
+                        <button class="control-btn" id="zoomOutBtn" title="Zoom Out">−</button>
+                        <button class="control-btn" id="resetBtn" title="Restablecer">⟳</button>
+                        <button class="control-btn" id="fullscreenBtn" title="fullscreen">&#x26F6;</button>
+                    </div>
+                       
+                    <button class="nav-button nav-prev" id="prevBtn">‹</button>
+                    <button class="nav-button nav-next" id="nextBtn">›</button>
+                </div>
+                
+                <div class="thumbnail-gallery" id="thumbnailGallery">
+                    <!-- Las miniaturas se generarán dinámicamente -->
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="specimen-card">
+                    <ul class="nav nav-tabs" id="specimenTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary" type="button" role="tab">
+                                Resumen
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="determinations-tab" data-bs-toggle="tab" data-bs-target="#determinations" type="button" role="tab">
+                                Registro
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location" type="button" role="tab">
+                                Localización
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="specimenTabsContent">
+                        <div class="tab-pane fade show active" id="summary" role="tabpanel">
+                            <div class="info-item">
+                                <div class="info-label">Nombre Científico</div>
+                                <div class="info-value">
+                                    <strong>{{ datos.nombre_cientifico or '—' }}</strong><br>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Nombre Común</div>
+                                <div class="info-value">
+                                    {{ datos.Nombre_comun or '—' }}
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Genero o Especie</div>
+                                <div class="info-value">
+                                    {{ datos.Genero_especie or '—' }}
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Familia</div>
+                                <div class="info-value">
+                                    {{ datos.Familia or '—' }}
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Descripción</div>
+                                <div class="info-value">
+                                <span class="scientific-name">{{ datos.Descripcion or '—' }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="determinations" role="tabpanel">
+                            <div class="info-item">
+                                <div class="info-label">Determinado por</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Determinado_por or '—' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Habito</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Habito or '—' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Tipo de bosque</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Tipo_bosque or '—' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Ecozona</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Ecozona or '—' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Colectores</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Colectores or '—' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Fecha de colecta</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Fecha_colecta or '—' }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="location" role="tabpanel">
+                            <div class="info-item">
+                                <div class="info-label">Pais</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Pais or '—' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Departamento</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Departamento or '—' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Provincia</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Provincia or '—' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Distrito</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">{{ datos.Distrito or '—' }}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">Coordendas</div>
+                                <div class="info-value">
+                                    <span class="scientific-name">UTM: {{ datos.UTM or '—' }}</span><br>
+                                    <span class="scientific-name">Este: {{ datos.Este or '—' }}</span><br>
+                                    <span class="scientific-name">Norte: {{ datos.Norte or '—' }}</span><br>
+                                    <span class="scientific-name">Altitud: {{ datos.Altitud or '—' }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- col -->
+        </div> <!-- row -->
+    </div> <!-- container -->
+
+    <!-- Botón flotante para regresar al index -->
+    <button class="back-to-index-btn" onclick="goToIndex()" data-tooltip="Volver al inicio">
+        🏠
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/viewer.js') }}"></script>
+    
+</body>
+</html>

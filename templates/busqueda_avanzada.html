@@ -1,0 +1,156 @@
+<!-- templates/busqueda_avanzada.html -->
+{% extends 'base.html' %}
+
+{% block title %}Búsqueda Avanzada - Herbario Digital{% endblock %}
+
+{% block content %}
+<div class="search-container">
+    <div class="search-tabs">
+        <a href="{{ url_for('index') }}" class="tab">Inicio</a>
+        <a href="{{ url_for('busqueda_rapida') }}" class="tab">Búsqueda Rápida</a>
+        <div class="tab active">Búsqueda Avanzada </div>
+    </div>
+    
+    <div class="advanced-search-content">
+        <h3>Taxonomía</h3>
+        <form id="advancedSearchForm" action="{{ url_for('busqueda_avanzada') }}" method="GET">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="familia">Familia:</label>
+                        <input type="text" id="familia" name="familia">
+                    </div>
+                    <div class="form-group">
+                        <label for="determinado_por">Determinado por:</label>
+                        <input type="text" id="determinado_por" name="determinado_por">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="genero">Género:</label>
+                        <input type="text" id="genero" name="genero">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre_comun">Nombre común:</label>
+                        <input type="text" id="nombre_comun" name="nombre_comun">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre_cientifico">Nombre científico:</label>
+                        <input type="text" id="nombre_cientifico" name="nombre_cientifico">
+                    </div>
+                    <div class="form-group">
+                        <label for="habito">Hábito:</label>
+                        <input type="text" id="habito" name="habito">
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Registro</h3>
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="colectores">Colectores:</label>
+                        <input type="text" id="colectores" name="colectores">
+                    </div>
+                    <div class="form-group">
+                        <label for="voucher">Voucher:</label>
+                        <input type="text" id="voucher" name="voucher">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                        <input type="text" id="fecha" name="fecha">
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Location</h3>
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pais">País:</label>
+                        <input type="text" id="pais" name="pais">
+                    </div>
+                    <div class="form-group">
+                        <label for="distrito">Distrito:</label>
+                        <input type="text" id="distrito" name="distrito">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="departamento">Departamento:</label>
+                        <input type="text" id="departamento" name="departamento">
+                    </div>
+                    <div class="form-group">
+                        <label for="localidad">Localidad:</label>
+                        <input type="text" id="localidad" name="localidad">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="provincia">Provincia:</label>
+                        <input type="text" id="provincia" name="provincia">
+                    </div>
+                    <div class="form-group">
+                        <label for="coordenadas">Coordenadas:</label>
+                        <input type="text" id="coordenadas" name="coordenadas">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-buttons">
+                <button type="submit" class="submit-btn">Enviar</button>
+                <button type="reset" class="clear-btn">Limpiar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('advancedSearchForm').addEventListener('submit', function(e) {
+        // Prevenir el envío del formulario por defecto
+        e.preventDefault();
+        
+        // Obtener todos los campos de entrada del formulario
+        var inputs = this.querySelectorAll('input[type="text"]');
+        
+        // Crear un objeto FormData para recopilar solo los campos no vacíos
+        var formData = new FormData();
+        
+        // Recorrer todos los campos de entrada
+        inputs.forEach(function(input) {
+            // Solo agregar al formData si el campo no está vacío
+            if (input.value.trim() !== '') {
+                formData.append(input.name, input.value);
+            }
+        });
+        
+        // Construir la URL con los parámetros no vacíos
+        var url = this.action;
+        var params = new URLSearchParams();
+        
+        // Convertir FormData a URLSearchParams
+        for (var pair of formData.entries()) {
+            params.append(pair[0], pair[1]);
+        }
+        
+        // Añadir los parámetros a la URL solo si hay alguno
+        var paramString = params.toString();
+        if (paramString) {
+            url += '?' + paramString;
+        }
+        
+        // Redirigir a la nueva URL
+        window.location.href = url;
+    });
+</script>
+
+{% endblock %}

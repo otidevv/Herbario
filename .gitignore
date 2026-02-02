@@ -1,0 +1,18 @@
+# Entorno virtual
+venv/
+
+# Carpetas de imágenes
+static/images/
+static/thumbnails/
+
+# Cache de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Variables de entorno (si tienes archivo .env)
+.env
+
+# Otros
+*.log
+.DS_Store

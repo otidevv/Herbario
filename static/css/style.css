@@ -1,0 +1,431 @@
+/* static/css/style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.fondo-imagen {
+  background-image: url('../images/tejido.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.blog-header {
+    background: transparent;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-superior-derecho {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 200px; /* puedes ajustar el tamaño */
+    height: auto;
+}
+
+.logo-superior-izquierdo {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    width: 93px; /* puedes ajustar el tamaño */
+    height: auto;
+}
+
+/* Cuando el ancho de pantalla sea menor o igual a 768px, ocultamos la imagen */
+@media (max-width: 768px) {
+    .logo-superior-derecho {
+        display: none;
+    }
+    .logo-superior-izquierdo {
+        display: none;
+    }    
+}
+
+/* Search tabs styling */
+.search-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab {
+    padding: 12px 24px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+}
+
+.tab.active {
+    background-color: #000;
+    color: #fff;
+}
+
+
+/*index*/
+.paginacion {
+    margin-top: 20px;
+    text-align: center;
+}
+.paginacion a {
+    margin: 0 5px;
+    padding: 8px 12px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+}
+.paginacion span {
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+/* Search form */
+.search-form {
+    margin: 20px 0;
+}
+
+.search-input-container {
+    display: flex;
+    max-width: 100%;
+}
+
+.search-input-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-right: none;
+    font-size: 16px;
+}
+
+
+.search-icon {
+    font-weight: bold;
+}
+
+/* Results info */
+.results-info {
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+/* Results table */
+.results-table {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+thead th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+td a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+.center {
+    text-align: center;
+}
+
+.thumbnail {
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+/* Advanced search form */
+
+.advanced-search-content {
+    background-color: #f8f9fa;
+    padding: 25px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.advanced-search-content h3 {
+    margin: 25px 0 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    color: #2c3e50;
+    font-size: 1.4em;
+}
+
+.form-section {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group label {
+    flex: 0 0 160px;
+    font-weight: 600;
+    color: #495057;
+    text-align: left;
+    margin: 0;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px solid #dee2e6;
+}
+
+.search-button {
+    background-color: #000;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #333;
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+.submit-btn, .clear-btn {
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+.clear-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.clear-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Estilos para checkboxes (Infraspecies) */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #007bff;
+}
+
+/* Estilos adicionales para secciones tipo tabla */
+.table-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Species detail page */
+.species-container {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+
+.species-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.species-image-container {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.species-image {
+    max-width: 100%;
+    max-height: 600px;
+}
+
+.camera-icon {
+    text-align: center;
+    font-size: 24px;
+    margin: 15px 0;
+}
+
+.rights-info {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.add-button {
+    margin-bottom: 30px;
+}
+
+.add-button button {
+    padding: 8px 16px;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.species-tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.species-tabs .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.species-tabs .tab.active {
+    background-color: #000;
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    width: 150px;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 15px;
+}
+
+.info-value {
+    flex: 1;
+}
+
+.no-image {
+    padding: 100px;
+    background-color: #f5f5f5;
+    color: #999;
+    text-align: center;
+}
+
+
+body {
+    background-image: url("{{ url_for('static', filename='images/tejido.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Capa semi-transparente para mejorar la legibilidad del contenido */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco semitransparente */
+    z-index: -1;
+    }
+
+.container {
+    position: relative;
+    z-index: 1;
+    }
+
+h1 {
+    text-align: center;
+    color: #2c5e1a; /* Color verde que combina con tema de herbario */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+.search-icon {
+    color: white;
+    font-size: 24px;
+}
